@@ -103,8 +103,8 @@ class HttpMethod:
             return self.session.post(url=uri, data=kwargs, timeout=timeout).\
                 json()
         except Exception as x:
-            print("It failed", x.__class__.__name__)
-            return None
+            message = "It failed" + x.__class__.__name__
+            raise Exception(message)
 
     def get(self, path, timeout=3, **kwargs):
         try:
@@ -112,9 +112,8 @@ class HttpMethod:
             return self.session.get(url=uri, params=kwargs, timeout=timeout).\
                 json()
         except Exception as x:
-            print("It failed", x.__class__.__name__)
-            return None
-
+            message = "It failed" + x.__class__.__name__
+            raise Exception(message)
 
 class BithumbHttp(HttpMethod):
     def __init__(self, conkey="", seckey=""):
@@ -143,7 +142,3 @@ class BithumbHttp(HttpMethod):
             'Api-Nonce': nonce
         })
         return super().post(path, **kwargs)
-
-
-if __name__ == "__main__":
-    print(PublicApi.ticker("BTC"))
