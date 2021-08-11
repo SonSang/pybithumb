@@ -121,7 +121,7 @@ class Bithumb:
                                     payment_currency=order_desc[3])
         if resp['status'] == '0000':
             # HACK : 빗썸이 데이터를 리스트에 넣어줌
-            return resp['data'][0]
+            return resp['data']
         else:
             Bithumb.raise_wrong_status_exception(resp)
 
